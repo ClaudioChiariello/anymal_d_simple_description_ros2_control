@@ -1,19 +1,32 @@
 <?xml version="1.0"?>
-
-<package format="2">
-
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>anymal_d_simple_description</name>
-  <version>1.0.9</version>
-  <description>ANYmal Description Package</description>
+  <version>0.0.0</version>
+  <description>repository to spawn anymal d in gz-sim</description>
 
   <license>BSD-3</license>
-
-  <author email="lisler@anybotics.com">Linus Isler</author>
+  <!--Main Authors-->
   <maintainer email="lisler@anybotics.com">Linus Isler</maintainer>
   <maintainer email="rdiethelm@anybotics.com">Remo Diethelm</maintainer>
+  <!--Modified by-->
+  <maintainer email="claud.chiariello@gmail.com">gaspg</maintainer>
+  <license>TODO: License declaration</license>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <test_depend>roslaunch</test_depend>
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
 
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+<export>
+  <build_type>ament_cmake</build_type>
+  <!--without see gz cannot see the meshes-->
+  <gazebo_ros gazebo_model_path="${prefix}/.."/>
+  <gz_sim plugin_path="${prefix}/.."/>
+</export>
+ 
 </package>

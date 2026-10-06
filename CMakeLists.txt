@@ -1,18 +1,21 @@
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.8)
 project(anymal_d_simple_description)
 
-find_package(catkin)
-
-catkin_package()
-
-install(DIRECTORY config launch meshes urdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
-
-if(CATKIN_ENABLE_TESTING)
-  find_package(catkin REQUIRED
-    COMPONENTS
-      roslaunch
-  )
-  roslaunch_add_file_check(launch/load.launch)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+ 
+ 
+install(DIRECTORY
+launch
+config
+urdf
+meshes
+DESTINATION share/${PROJECT_NAME}
+)
+ 
+ 
+ament_package()

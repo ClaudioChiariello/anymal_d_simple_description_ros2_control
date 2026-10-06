@@ -1,0 +1,66 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+    controllers: ["joint_state_broadcaster", "joint_trajectory_controller"]
+
+    joint_state_broadcaster: #This controller publishes the state of all resources registered to a hardware_interface::StateInterface to a topic of type sensor_msgs/msg/JointState.
+      type: joint_state_broadcaster/JointStateBroadcaster #this is just implemented, it is used to publish on the /joint_states topic the sensor msgs. You will have to define the next controller 
+
+    joint_trajectory_controller: #name that you want
+      type: joint_trajectory_controller/JointTrajectoryController
+    
+    position_controller:
+      type: position_controllers/JointGroupPositionController
+
+position_controller:
+  ros__parameters:
+    joints:
+      - LF_HAA
+      - LF_HFE
+      - LF_KFE
+      - RF_HAA
+      - RF_HFE
+      - RF_KFE
+      - LH_HAA
+      - LH_HFE
+      - LH_KFE
+      - RH_HAA
+      - RH_HFE
+      - RH_KFE
+
+    command_interfaces:
+      - position
+      - velocity
+
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - LF_HAA
+      - LF_HFE
+      - LF_KFE
+      - RF_HAA
+      - RF_HFE
+      - RF_KFE
+      - LH_HAA
+      - LH_HFE
+      - LH_KFE
+      - RH_HAA
+      - RH_HFE
+      - RH_KFE
+
+    command_interfaces:
+      - position
+
+    state_interfaces:
+      - position
+      - velocity
+
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0 # Defaults to 20
+    allow_partial_joints_goal: true # #otherwise you cannot select to contorl not all joints. 
+    open_loop_control: true
+    allow_integration_in_goal_trajectories: true
+
+    constraints:
+      stopped_velocity_tolerance: 0.01 # Defaults to 0.01
+      goal_time: 0.0 # Defaults to 0.0 (start immediately)
